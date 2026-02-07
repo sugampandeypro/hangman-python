@@ -1,7 +1,65 @@
 import random
+stages = [r'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''', r'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', r'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
 word_list = ["aardvark", "baboon", "camel"]
 
-chosen_word = random.choice(word_list)
+lives=6
+chosen_word = (random.choice
+               (word_list))
 print(chosen_word)
 
 placeholder = ""
@@ -10,17 +68,18 @@ for position in range(word_length):
     placeholder += "_"
 print(placeholder)
 
-# TODO-1: - Use a while loop to let the user guess again.
-game_over= False
-correct_letters=[]
-while not game_over :
-    guess = input("Guess a letter: ").lower()
+game_over = False
+correct_letters = []
+
+while not game_over:
+    guess = (input
+             ("Guess a letter: ").lower())
+
     display = ""
-# TODO-2: Change the for loop so that you keep the previous correct letters in display.
     for letter in chosen_word:
         if letter == guess:
             display += letter
-            correct_letters.append(letter)
+            correct_letters.append(guess)
         elif letter in correct_letters:
             display += letter
         else:
@@ -28,6 +87,16 @@ while not game_over :
 
     print(display)
 
+
+    if guess not in chosen_word:
+        lives-=1
+        print(stages[lives])
+        if lives<=0:
+            game_over=True
+            print("You loose")
+
     if "_" not in display:
-        game_over= True
-        print("You win!")
+        game_over = True
+        print("You win.")
+
+
